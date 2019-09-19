@@ -35,3 +35,4 @@ Instructions:
 - Once complete run `node JSONtoMongo.js` to add the json file of listings to your database
 5. Complete the functions in `queries.js`
 - Once complete run `node queries.js` //It should print out all the listings
+# Bootcamp2
