@@ -12,6 +12,7 @@ var fs = require('fs'),
 /* Connect to your database using mongoose - remember to keep your key secret*/
 //see https://mongoosejs.com/docs/connections.html
 //See https://docs.atlas.mongodb.com/driver-connection/
+mongoose.connect(config.db.uri, {useNewUrlParser: true}, { useUnifiedTopology: true })
 
 /* 
   Instantiate a mongoose model for each listing object in the JSON file, 
@@ -22,6 +23,16 @@ var fs = require('fs'),
  */
 
 
+fs.readFile('listings.json', 'utf8', function(err, data) {
+  if (err) throw err;
+  var listingData = JSON.parse(data);
+  
+  //creates and saves an entry for every entry in the parsed json file
+  listingData.entries.forEach((entry) => {
+    (new Listing(entry)).save();
+  });
+  
+});
 /*  
   Check to see if it works: Once you've written + run the script, check out your MongoLab database to ensure that 
   it saved everything correctly. 
